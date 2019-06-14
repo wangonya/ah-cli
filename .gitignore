@@ -1,0 +1,7 @@
+env
+.DS_Store
+*.egg-info/
+*.egg
+__pycache__/
+*.py[cod]
+*$py.class
