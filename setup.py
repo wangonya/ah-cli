@@ -9,10 +9,12 @@ setup(
             "Click",
             "requests",
             "halo",
-            "pytest"
+            "pytest",
+            "pytest-cov",
+            "coveralls",
             ],
         entry_points="""
         [console_scripts]
-        ah=app:main
+        ah=app:cli
         """,
         )

@@ -1,9 +1,11 @@
-from click.testing import CliRunner
-from app import main
+from app import cli
 
 
-def test_app():
-    runner = CliRunner()
-    res = runner.invoke(main)
+def test_app(runner):
+    """
+    Basic test to check that invoking 'ah'
+    with no command returns welcome message
+    """
+    res = runner.invoke(cli)
     assert res.exit_code == 0
-    assert res.output == "Hello World!\n"
+    assert "Welcome to the ah console app" in res.output
