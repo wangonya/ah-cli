@@ -2,4 +2,6 @@ language: python
 install:
   - pip install --editable .
 script:
-  - pytest
+  - pytest --cov=app
+after_success:
+  - coveralls
