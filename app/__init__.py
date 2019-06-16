@@ -18,3 +18,12 @@ def view(article_id):
     View single article
     """
     GetArticles.get_single_article(article_id)
+
+
+@cli.command()
+@click.option("--limit", "-l", type=int, default=None)
+def list(limit):
+    """
+    Return list of all articles
+    """
+    GetArticles.get_all_articles(limit)

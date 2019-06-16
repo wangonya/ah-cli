@@ -4,7 +4,8 @@ import requests
 from app.utils import (
         spinner,
         url,
-        check_connection
+        check_connection,
+        json_formatter,
         )
 
 
@@ -29,4 +30,24 @@ class GetArticles:
         elif response.status_code == 200:
             spinner.succeed("Article found 🤓")
             click.echo("Status code: {}".format(response.status_code))
-            click.echo(response.content)
+            article = json_formatter(response.text)
+            click.echo(article)
+
+    @staticmethod
+    def get_all_articles(limit):
+        """
+        Returns article with matching article_id
+        """
+        check_connection()
+        spinner.start()
+        response = requests.get(url + "/articles/feed/")
+        spinner.stop()
+        spinner.clear()
+        spinner.succeed("Done fetching articles")
+        click.echo("Status code: {}".format(response.status_code))
+
+        if limit:
+            click.echo("Limited to {} articles".format(limit))
+
+        articles = json_formatter(response.text, limit)
+        click.echo(articles)
