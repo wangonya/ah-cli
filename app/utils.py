@@ -1,6 +1,7 @@
 import sys
 import requests
 import json
+import csv
 
 from halo import Halo
 
@@ -32,3 +33,26 @@ def json_formatter(data, limit=None):
         return json.dumps(limited_json_data, indent=2)
 
     return json.dumps(json_data, indent=2)
+
+
+def export_json_csv(data, _format, limit):
+    data = json.loads(data)
+
+    if not limit:
+        data = data["results"]
+
+    if _format == "json":
+        with open('data.json', 'w', encoding='utf-8') as json_file:
+            json.dump(data, json_file, indent=2)
+    elif _format == "csv":
+        with open('data.csv', 'w', encoding='utf-8') as csv_file:
+            csv_writer = csv.writer(csv_file)
+            count = 0
+            for article_data in data:
+                if count == 0:
+                    header = article_data.keys()
+                    csv_writer.writerow(header)
+                    count += 1
+                csv_writer.writerow(article_data.values())
+
+    spinner.succeed("Exported to {} 🚀".format(_format))

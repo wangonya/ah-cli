@@ -13,17 +13,23 @@ def cli(ctx):
 
 @cli.command()
 @click.argument("article_id")
-def view(article_id):
+@click.option('--export', '-e', type=click.Choice(["json"]))
+def view(article_id, export):
     """
     View single article
     """
-    GetArticles.get_single_article(article_id)
+    GetArticles.get_single_article(article_id, export)
 
 
 @cli.command()
 @click.option("--limit", "-l", type=int, default=None)
-def list(limit):
+@click.option(
+        '--export', '-e',
+        type=click.Choice(["csv", "json"]),
+        default=None
+        )
+def list(limit, export):
     """
     Return list of all articles
     """
-    GetArticles.get_all_articles(limit)
+    GetArticles.get_all_articles(limit, export)
