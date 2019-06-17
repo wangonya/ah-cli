@@ -6,6 +6,7 @@ from app.utils import (
         url,
         check_connection,
         json_formatter,
+        export_json_csv,
         )
 
 
@@ -15,7 +16,7 @@ class GetArticles:
     """
 
     @staticmethod
-    def get_single_article(article_id):
+    def get_single_article(article_id, export):
         """
         Returns article with matching article_id
         """
@@ -24,6 +25,7 @@ class GetArticles:
         response = requests.get(url + "/articles/{}/".format(article_id))
         spinner.stop()
         spinner.clear()
+
         if response.status_code == 404:
             spinner.warn("The article requested was not found 😬")
             click.echo("Status code: {}".format(response.status_code))
@@ -32,9 +34,12 @@ class GetArticles:
             click.echo("Status code: {}".format(response.status_code))
             article = json_formatter(response.text)
             click.echo(article)
+            if export:
+                #  limited to 1 article by default
+                export_json_csv(article, export, limit=True)
 
     @staticmethod
-    def get_all_articles(limit):
+    def get_all_articles(limit, export):
         """
         Returns article with matching article_id
         """
@@ -51,3 +56,5 @@ class GetArticles:
 
         articles = json_formatter(response.text, limit)
         click.echo(articles)
+        if export:
+            export_json_csv(articles, export, limit)
