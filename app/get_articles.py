@@ -58,3 +58,24 @@ class GetArticles:
         click.echo(articles)
         if export:
             export_json_csv(articles, export, limit)
+
+    @staticmethod
+    def get_filtered_article(search_query):
+        """
+        Returns article with matching search_query
+        """
+        check_connection()
+        spinner.start()
+        response = requests.get(
+                    url + "/articles/search?{}".format(search_query))
+        spinner.stop()
+        spinner.clear()
+
+        if response.status_code == 400:
+            spinner.warn("The article requested was not found 😬")
+            click.echo("Status code: {}".format(response.status_code))
+        elif response.status_code == 200:
+            spinner.succeed("Article found 🤓")
+            click.echo("Status code: {}".format(response.status_code))
+            article = json_formatter(response.text)
+            click.echo(article)
