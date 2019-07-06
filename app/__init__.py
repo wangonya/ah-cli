@@ -33,3 +33,12 @@ def list(limit, export):
     Return list of all articles
     """
     GetArticles.get_all_articles(limit, export)
+
+
+@cli.command()
+@click.argument("search_query", type=str)
+def search(search_query):
+    """
+    Search by tag/title/author
+    """
+    GetArticles.get_filtered_article(search_query)
