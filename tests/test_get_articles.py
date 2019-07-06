@@ -1,4 +1,4 @@
-from app import view, list
+from app import view, list, search
 
 
 def test_view_not_found(runner):
@@ -32,3 +32,16 @@ def test_list(runner):
     res = runner.invoke(list, ["--limit", "2"])
     assert res.exit_code == 0
     assert "Limited to 2 articles" in res.output
+
+
+def test_search(runner):
+    """
+    Test search
+    """
+    res = runner.invoke(search, ["author=wangonya"])
+    assert res.exit_code == 0
+    assert "Status code: 200" in res.output
+
+    res = runner.invoke(search, ["auonya"])
+    assert res.exit_code == 0
+    assert "Status code: 400" in res.output
