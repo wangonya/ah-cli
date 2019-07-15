@@ -24,3 +24,11 @@ def test_export_list_csv(runner):
     """
     res = runner.invoke(list, ["-e", "csv"])
     assert res.exit_code == 0
+
+
+def test_export_list_sqlite(runner):
+    """
+    Tests exporting articles list to sqlite
+    """
+    res = runner.invoke(list, ["-e", "sqlite"])
+    assert res.exit_code == 0
