@@ -8,3 +8,4 @@ __pycache__/
 .coverage
 data.json
 data.csv
+data.db

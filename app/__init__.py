@@ -25,7 +25,7 @@ def view(article_id, export):
 @click.option("--limit", "-l", type=int, default=None)
 @click.option(
         '--export', '-e',
-        type=click.Choice(["csv", "json"]),
+        type=click.Choice(["csv", "json", "sqlite"]),
         default=None
         )
 def list(limit, export):
