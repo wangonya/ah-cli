@@ -32,7 +32,10 @@ def json_formatter(data, limit=None, _next=None):
     if limit:
         limited_json_data = json_data["results"][:limit]
         if _next:
-            print("limit = {} next = {}".format(limit, _next-1))
+            print("{}:{}".format(_next, limit))
+            print(json_data["results"][2:2])
+            next_json_data = json_data["results"][_next:limit]
+            return json.dumps(next_json_data, indent=2)
         return json.dumps(limited_json_data, indent=2)
 
     return json.dumps(json_data, indent=2)

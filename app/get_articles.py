@@ -58,7 +58,8 @@ class GetArticles:
             if click.confirm("Would you like to see the next {} articles?"
                              .format(limit)):
                 click.echo("fetching next {}...".format(limit))
-                json_formatter(response.text, limit, _next)
+                articles = json_formatter(response.text, limit, _next)
+                click.echo(articles)
                 _next += limit
                 get_next(limit, _next)
 
