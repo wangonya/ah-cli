@@ -21,4 +21,5 @@ git clone https://github.com/wangonya/ah-cli.git && cd ah-cli
 * `ah list --export json` - list all articles and export to JSON file
 * `ah list --export csv` - list all articles and export to CSV file
 * `ah list --export sqlite` - list all articles and export to sqlite database
+
 **The commands can also be combined. E.g, `ah list --limit 2 --export json` lists the first 2 articles and exports the data to a JSON file**
