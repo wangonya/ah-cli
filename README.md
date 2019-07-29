@@ -14,12 +14,15 @@ git clone https://github.com/wangonya/ah-cli.git && cd ah-cli
 * Run `. .env` to install the app.
 
 ## Commands
-* `ah --help` - display help page
-* `ah view new_wangonya` - view the article with the slug "new_wangonya"
-* `ah list` - list all articles
-* `ah list --limit 2` - list the first two articles
-* `ah list --export json` - list all articles and export to JSON file
-* `ah list --export csv` - list all articles and export to CSV file
-* `ah list --export sqlite` - list all articles and export to sqlite database
+*  `ah --help` - display help page
+*  `ah view new_wangonya` - view the article with the slug "new_wangonya"
+*  `ah list` - list all articles
+*  `ah list --limit 2` - list the first two articles
+*  `ah list --export json` - list all articles and export to JSON file
+*  `ah list --export csv` - list all articles and export to CSV file
+*  `ah list --export sqlite` - list all articles and export to sqlite database
+*  `ah search tag=trevor` - search for an article with the tag "trevor"
+*  `ah search author=wangonya` - search for an article with the author "wangonya"
+*  `ah search title=new` - search for an article with the title "new"
 
 **The commands can also be combined. E.g, `ah list --limit 2 --export json` lists the first 2 articles and exports the data to a JSON file**
