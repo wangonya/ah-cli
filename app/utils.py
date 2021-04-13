@@ -23,7 +23,7 @@ def check_connection(url="http://example.com/"):
         sys.exit(1)
 
 
-def json_formatter(data, limit=None):
+def json_formatter(data, limit=None, _next=None):
     """
     Preetify the json data 💅
     """
@@ -31,6 +31,11 @@ def json_formatter(data, limit=None):
 
     if limit:
         limited_json_data = json_data["results"][:limit]
+        if _next:
+            print("{}:{}".format(_next, limit))
+            print(json_data["results"][2:2])
+            next_json_data = json_data["results"][_next:limit]
+            return json.dumps(next_json_data, indent=2)
         return json.dumps(limited_json_data, indent=2)
 
     return json.dumps(json_data, indent=2)

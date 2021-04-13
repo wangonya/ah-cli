@@ -51,11 +51,22 @@ class GetArticles:
         spinner.succeed("Done fetching articles")
         click.echo("Status code: {}".format(response.status_code))
 
-        if limit:
-            click.echo("Limited to {} articles".format(limit))
-
         articles = json_formatter(response.text, limit)
         click.echo(articles)
+
+        def get_next(limit, _next):
+            if click.confirm("Would you like to see the next {} articles?"
+                             .format(limit)):
+                click.echo("fetching next {}...".format(limit))
+                articles = json_formatter(response.text, limit, _next)
+                click.echo(articles)
+                _next += limit
+                get_next(limit, _next)
+
+        if limit:
+            click.echo("Limited to {} articles".format(limit))
+            get_next(limit, _next=limit)
+
         if export:
             export_json_csv(articles, export, limit)
 
